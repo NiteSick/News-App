@@ -11,14 +11,21 @@ import com.example.newsapp.ui.NewsViewModel
 
 
 class ArticleFragment : Fragment() {
+    
+    private var binding : FragmentArticleBinding?  = null
 
     lateinit var viewModel : NewsViewModel
-
+    val args : ArticleFragmentArgs by  navArgs()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
+        val article = args.article
+        binding?.webView?.apply {
+            webViewClient = WebViewClient()
+            loadUrl(article.url)
+        }
     }
 
 
